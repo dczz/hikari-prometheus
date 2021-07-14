@@ -1,0 +1,108 @@
+{
+  "id": 2,
+  "gridPos": {
+    "h": 9,
+    "w": 12,
+    "x": 0,
+    "y": 0
+  },
+  "type": "timeseries",
+  "title": "HikariCP",
+  "description": "数据库连接池信息",
+  "fieldConfig": {
+    "defaults": {
+      "custom": {
+        "drawStyle": "line",
+        "lineInterpolation": "linear",
+        "barAlignment": 0,
+        "lineWidth": 1,
+        "fillOpacity": 0,
+        "gradientMode": "none",
+        "spanNulls": false,
+        "showPoints": "auto",
+        "pointSize": 5,
+        "stacking": {
+          "mode": "none",
+          "group": "A"
+        },
+        "axisPlacement": "auto",
+        "axisLabel": "",
+        "scaleDistribution": {
+          "type": "linear"
+        },
+        "hideFrom": {
+          "tooltip": false,
+          "viz": false,
+          "legend": false
+        },
+        "thresholdsStyle": {
+          "mode": "off"
+        }
+      },
+      "color": {
+        "mode": "palette-classic"
+      },
+      "thresholds": {
+        "mode": "absolute",
+        "steps": [
+          {
+            "color": "green",
+            "value": null
+          },
+          {
+            "color": "red",
+            "value": 80
+          }
+        ]
+      },
+      "mappings": []
+    },
+    "overrides": []
+  },
+  "options": {
+    "tooltip": {
+      "mode": "single"
+    },
+    "legend": {
+      "displayMode": "list",
+      "placement": "bottom",
+      "calcs": []
+    }
+  },
+  "targets": [
+    {
+      "exemplar": true,
+      "expr": "hikaricp_connections_idle{pool=\"hikariPool\"}",
+      "format": "time_series",
+      "instant": false,
+      "interval": "",
+      "legendFormat": "空闲连接",
+      "refId": "A"
+    },
+    {
+      "exemplar": true,
+      "expr": "hikaricp_connections_active{pool=\"hikariPool\"}",
+      "hide": false,
+      "interval": "",
+      "legendFormat": "可用连接",
+      "refId": "B"
+    },
+    {
+      "exemplar": true,
+      "expr": "hikaricp_connections_pending{pool=\"hikariPool\"}",
+      "hide": false,
+      "interval": "",
+      "legendFormat": "阻塞连接",
+      "refId": "C"
+    },
+    {
+      "exemplar": true,
+      "expr": "rate(hikaricp_connections_timeout_total{pool=\"hikariPool\"}[$__interval])",
+      "hide": false,
+      "interval": "",
+      "legendFormat": "超时总数",
+      "refId": "D"
+    }
+  ],
+  "datasource": null
+}

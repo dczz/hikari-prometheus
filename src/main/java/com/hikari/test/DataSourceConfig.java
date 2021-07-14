@@ -25,7 +25,6 @@ public class DataSourceConfig {
     return ds;
   }
 
-
   private void metricsDs (HikariDataSource ds) {
     //初始化prometheus exporter
     PrometheusMeterRegistry prometheusRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
